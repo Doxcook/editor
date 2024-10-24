@@ -5,42 +5,39 @@ import org.example.model.MyShape;
 import org.example.view.Frame;
 import org.example.view.Panel;
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.Collection;
 
 public class Controller {
+
     //поля для доступа к панели, рамке, модели
     Panel panel;
     Frame frame;
     public Model model;
-    Point2D[] points;
+
+    Point2D[] points; //храним точки для фигуры
 
 
     //конструктор по умолчанию
     public Controller() {
-        //model = new Model();
-        model = Model.getInstance();
+        model = Model.getInstance(); // синглтон для того, чтоб модель точно была единственна
         panel = new Panel(this);
         frame = new Frame(panel);
-        points = new Point2D[2];
-        model.setCurrentShape(new MyShape());
+        points = new Point2D[2]; //храним две точки для фигуры
+        model.setCurrentShape(new MyShape()); // ставим сразу фигуру в текущую
     }
 
     //обработка действий мыши: нажатие кнопки
     public void mousePressed(Point point){
-        points[0]=point;
-       model.createShape();
+        points[0]=point; // ставим первую точку
+        model.createShape(); //создаем фигуру в модели
 
     }
 
     //обработка действий мыши: перемещение
     public void mouseDragged(Point point){
-        points[1]=point;
-        model.setFrame(points);
-
-
-
+        points[1]=point; //ставим вторую (завершающую) точку
+        model.setFrame(points); //устанавливаем размер фигуру из массива точек
     }
 
     //достаем коллекцию фигур из модели

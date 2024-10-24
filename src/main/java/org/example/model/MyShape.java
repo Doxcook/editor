@@ -7,14 +7,13 @@ import java.awt.geom.RectangularShape;
 
 //класс фигуры
 public class MyShape {
-    Color color;
     RectangularShape shape; //объект прямоугольника
-    //Point2D p; // начальная точка в 2х мерном пространстве
+    Color color; //цвет
 
     // конструктор по умолчанию
     public MyShape() {
-        color = Color.BLUE;
-        shape = new Rectangle2D.Double();
+        color = Color.BLUE; //цвет обводки
+        shape = new Rectangle2D.Double(); //фигура - прямоугольник
     }
 
     //геттер фигуры
@@ -22,13 +21,10 @@ public class MyShape {
         return shape;
     }
 
-    //метод для определения первой точки
+    //создание фигуры по точкам
     public void createShape(Point2D[] point) {
         shape.setFrameFromDiagonal(point[0], point[1]);
     }
-
-
-
 
     // Добавляем рисовку фигуры
     public void draw(Graphics2D g) {
@@ -37,12 +33,16 @@ public class MyShape {
         g.draw(shape);
         g.setPaint(p);
     }
+
+    //метод клонирования
     public MyShape clone(){
-        MyShape s = new MyShape();
+        MyShape s = new MyShape(); //создаем новую фигуру
+
+        //ставим все характеристики прошлой
         s.color = this.color;
         s.shape = (RectangularShape) shape.clone();
+
+        //возвращаем готовую копию
         return s;
-
-
     }
 }

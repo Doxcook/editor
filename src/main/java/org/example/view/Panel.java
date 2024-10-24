@@ -17,7 +17,7 @@ public class Panel extends JPanel {
     public Panel(Controller controller) {
         this.controller = controller;  //ссылка на контроллер
 
-        //слушатели мыши
+        //слушатель мыши: нажатие
         addMouseListener(new MouseAdapter() {
             @Override
             //на нажатие
@@ -33,11 +33,12 @@ public class Panel extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 super.mouseDragged(e);
                 controller.mouseDragged(e.getPoint()); //управление через контроллер
-                repaint(); // обновлние панели при каждом перемещении мыши
+                repaint(); // обновление панели при каждом перемещении мыши
             }
         });
     }
 
+    //рисовка
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -48,7 +49,5 @@ public class Panel extends JPanel {
         for (MyShape myShape : myShapes) {
             myShape.draw(g2); // Отрисовка каждой фигуры
         }
-
-
     }
 }

@@ -12,9 +12,10 @@ public class Model {
 
     //конструктор по умолчанию
     private Model(){
-        myShapes = new ArrayList<>();
+        myShapes = new ArrayList<>(); //создаем коллекцию фигур
     }
 
+    //конструктор синглтона
     public static Model getInstance(){
         if (model == null){
             model = new Model();
@@ -37,14 +38,13 @@ public class Model {
         return myShapes;
     }
 
-    //добавление в коллекцию
-
-
+    //создать фигуру
     public void createShape() {
         currentMyShape = currentMyShape.clone();
         myShapes.add(currentMyShape);
     }
 
+    //установить размер
     public void setFrame(Point2D[] points) {
         currentMyShape.createShape(points);
     }
