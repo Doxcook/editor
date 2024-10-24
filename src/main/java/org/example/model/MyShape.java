@@ -6,12 +6,14 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
 //класс фигуры
-public class Shape {
+public class MyShape {
+    Color color;
     RectangularShape shape; //объект прямоугольника
     //Point2D p; // начальная точка в 2х мерном пространстве
 
     // конструктор по умолчанию
-    public Shape() {
+    public MyShape() {
+        color = Color.BLUE;
         shape = new Rectangle2D.Double();
     }
 
@@ -21,18 +23,26 @@ public class Shape {
     }
 
     //метод для определения первой точки
-    public void createShape(Point point) {
-        shape.setFrameFromDiagonal(new Point2D.Double(point.x, point.y),new Point2D.Double(point.x, point.y));
+    public void createShape(Point2D[] point) {
+        shape.setFrameFromDiagonal(point[0], point[1]);
     }
 
-    //метод для определения второй точки
-    public void finishShape(Point point) {
-        Point2D f = (Point2D) point;
-        shape.setFrameFromDiagonal(shape.get); //устанавливаем размер по диагонали
-    }
+
+
 
     // Добавляем рисовку фигуры
     public void draw(Graphics2D g) {
+        Paint p= g.getPaint();
+        g.setColor(color);
         g.draw(shape);
+        g.setPaint(p);
+    }
+    public MyShape clone(){
+        MyShape s = new MyShape();
+        s.color = this.color;
+        s.shape = (RectangularShape) shape.clone();
+        return s;
+
+
     }
 }

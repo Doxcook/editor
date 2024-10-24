@@ -1,10 +1,12 @@
 package org.example.controller;
 
 import org.example.model.Model;
-import org.example.model.Shape;
+import org.example.model.MyShape;
 import org.example.view.Frame;
 import org.example.view.Panel;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 import java.util.Collection;
 
 public class Controller {
@@ -12,32 +14,36 @@ public class Controller {
     Panel panel;
     Frame frame;
     public Model model;
+    Point2D[] points;
 
 
     //конструктор по умолчанию
     public Controller() {
+        model = new Model();
         panel = new Panel(this);
         frame = new Frame(panel);
-        model = new Model();
+        points = new Point2D[2];
+        model.setCurrentShape(new MyShape());
     }
 
     //обработка действий мыши: нажатие кнопки
     public void mousePressed(Point point){
-        Shape newShape = new Shape(); //создаем новый объект фигуры
-        newShape.createShape(point); // ставим начальную точку в месте нажатия мыши
-        model.setCurrentShape(newShape); //в модели ставим текущим эту фигуру
+        points[0]=point;
+       model.createShape();
+
     }
 
     //обработка действий мыши: перемещение
     public void mouseDragged(Point point){
-        Shape current = model.getCurrentShape(); //получаем текущую фигуру
-        current.finishShape(point); //на каждое изменение положения зажатой мыши обновляем вторую точку
-        panel.repaint(); // и перерисовываем в панели
-        model.add(current);
+        points[1]=point;
+        model.setFrame(points);
+
+
+
     }
 
     //достаем коллекцию фигур из модели
-    public Collection<Shape> translate(){
+    public Collection<MyShape> translate(){
         return model.getList();
     }
 }

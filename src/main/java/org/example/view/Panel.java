@@ -1,7 +1,7 @@
 package org.example.view;
 
 import org.example.controller.Controller;
-import org.example.model.Shape;
+import org.example.model.MyShape;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,15 +44,11 @@ public class Panel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
 
         // Рисуем все фигуры из модели
-        Collection<Shape> shapes = controller.translate();
-        for (Shape shape : shapes) {
-            shape.draw(g2); // Отрисовка каждой фигуры
+        Collection<MyShape> myShapes = controller.translate();
+        for (MyShape myShape : myShapes) {
+            myShape.draw(g2); // Отрисовка каждой фигуры
         }
 
-        // Отрисовка текущей фигуры, если она есть
-        Shape currentShape = controller.model.getCurrentShape();
-        if (currentShape != null) {
-            currentShape.draw(g2);
-        }
+
     }
 }

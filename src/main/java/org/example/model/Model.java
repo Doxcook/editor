@@ -2,37 +2,42 @@ package org.example.model;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class Model {
-    Shape currentShape; //текущая фигура
-    Collection<Shape> shapes; //сюда складываем все фигуры
+    MyShape currentMyShape; //текущая фигура
+    Collection<MyShape> myShapes; //сюда складываем все фигуры
 
     //конструктор по умолчанию
     public Model(){
-        shapes = new ArrayList<>();
+        myShapes = new ArrayList<>();
     }
 
     //для установки текущей фигура
-    public void setCurrentShape(Shape currentShape) {
-        this.currentShape = currentShape;
+    public void setCurrentShape(MyShape currentMyShape) {
+        this.currentMyShape = currentMyShape;
     }
 
     //получаем текущую фигуру
-    public Shape getCurrentShape() {
-        return currentShape;
+    public MyShape getCurrentShape() {
+        return currentMyShape;
     }
 
     //для получения коллекции фигур
-    public Collection<Shape> getList() {
-        return shapes;
+    public Collection<MyShape> getList() {
+        return myShapes;
     }
 
     //добавление в коллекцию
-    public void add(Shape currentShape){
-        shapes.add(currentShape);
+
+
+    public void createShape() {
+        currentMyShape = currentMyShape.clone();
+        myShapes.add(currentMyShape);
     }
 
+    public void setFrame(Point2D[] points) {
+        currentMyShape.createShape(points);
+    }
 }
