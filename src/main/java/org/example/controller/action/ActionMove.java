@@ -6,7 +6,7 @@ import org.example.model.MyShape;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class ActionDraw implements ActionInterface {
+public class ActionMove implements ActionInterface{
     MyShape sampleShape;
     MyShape shape;
     Point2D[] p;
@@ -14,16 +14,6 @@ public class ActionDraw implements ActionInterface {
 
     public void setSampleShape(MyShape sampleShape) {
         this.sampleShape = sampleShape;
-    }
-
-    public ActionDraw() {
-        p = new Point2D[2];
-    }
-
-    public ActionDraw(  Model model) {
-        shape = new MyShape();
-        this.p = new Point2D[2];
-        this.model = model;
     }
 
     public void setShape(MyShape shape) {
@@ -48,5 +38,10 @@ public class ActionDraw implements ActionInterface {
     @Override
     public void mouseDragged(Point2D point) {
         stretchShape((Point) point);
+    }
+
+    @Override
+    public void setModel(Model m) {
+
     }
 }

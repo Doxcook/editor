@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.controller.action.ActionDraw;
+import org.example.controller.action.ActionInterface;
 import org.example.model.Model;
 import org.example.model.MyShape;
 import org.example.view.Frame;
@@ -17,7 +18,8 @@ public class Controller {
     Panel panel;
     Frame frame;
     public Model model;
-    ActionDraw actionDraw;
+    //ActionDraw actionDraw; //new actionInterface
+    ActionInterface actionInterface;
 
 
     //конструктор по умолчанию
@@ -26,20 +28,24 @@ public class Controller {
         panel = new Panel(this);
         frame = new Frame(panel, this);
         model.setCurrentShape(new MyShape()); // ставим сразу фигуру в текущую
-        actionDraw = new ActionDraw(model);
-        actionDraw.setSampleShape(new MyShape(new Rectangle2D.Double(), Color.cyan));
+        actionInterface = new ActionDraw(model);
 
+    }
+
+    public void setActionInterface(ActionInterface actionInterface) {
+        this.actionInterface = actionInterface;
+        actionInterface.setModel(model);
     }
 
     //обработка действий мыши: нажатие кнопки
     public void mousePressed(Point point){
-         actionDraw.createShape(point);//создаем фигуру в модели
+         actionInterface.mousePressed(point);
 
     }
 
     //обработка действий мыши: перемещение
     public void mouseDragged(Point point){
-        actionDraw.stretchShape(point);
+        actionInterface.mouseDragged(point);
     }
 
     //достаем коллекцию фигур из модели
@@ -48,10 +54,10 @@ public class Controller {
     }
 
     public void setRectangle() {
-        actionDraw.setSampleShape(new MyShape(new Rectangle2D.Double(),Color.BLUE));
+        actionInterface.setSampleShape(new MyShape(new Rectangle2D.Double(),Color.BLUE));
     }
 
     public void setEllipse() {
-        actionDraw.setSampleShape(new MyShape(new Ellipse2D.Double(), Color.cyan));
+        actionInterface.setSampleShape(new MyShape(new Ellipse2D.Double(), Color.cyan));
     }
 }

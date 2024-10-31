@@ -11,6 +11,7 @@ public class MyShape {
     Color color; //цвет
     FillBehavior fillBehavior;
 
+
     // конструктор по умолчанию
     public MyShape() {
         shape = new Rectangle2D.Double(); //фигура - прямоугольник
